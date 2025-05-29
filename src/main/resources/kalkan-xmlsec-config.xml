@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns="http://www.xmlsecurity.org/NS/#configuration">
+    <AlgorithmMapping URI="http://www.w3.org/2001/04/xmldsig-more#gost34310-gost34311" 
+                      JCEName="GOST3410"
+                      AlgorithmClass="kz.gov.pki.kalkan.xmldsig.algorithms.implementations.Gost34310Gost34311" />
+    
+    <AlgorithmMapping URI="http://www.w3.org/2001/04/xmldsig-more#gost34311" 
+                      JCEName="GOST3411"
+                      AlgorithmClass="kz.gov.pki.kalkan.xmldsig.algorithms.implementations.MessageDigestGost34311" />
+                     
+    <ResourceResolvers>
+        <Resolver JAVACLASS="org.apache.xml.security.stax.impl.resourceResolvers.ResolverDirectHTTP" 
+                 DESCRIPTION="The ResolverDirectHTTP can retrieve data from URIs that start with http://" />
+    </ResourceResolvers>
+</Configuration> 

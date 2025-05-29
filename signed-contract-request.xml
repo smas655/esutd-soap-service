@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="http://10.61.40.133/shep/bip-sync-wss-gost/">
+   <soapenv:Header><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignatureValue>TCLQNX6jS8Nyn5E5GPZ5ezCyLAHRLr9buYNqEUFRcOwmrs8HV3n90/08203Z45i6AQrAqcvsk7DDfpp1v5tZbxlP0+NU0NikzADGiTUWCCFsAOq+jsf4UkkrnrMP3DrXL0oSPrGQQGlUUZ+z2FHYVEn+V3mqKAK4nm1YaqxqlTg=</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIE6DCCBFCgAwIBAgIUKwt8+U4s0qnUzEOaXOsBEdpbLzIwDgYKKoMOAwoBAQIDAgUAMFgxSTBHBgNVBAMMQNKw0JvQotCi0KvSmiDQmtCj05jQm9CQ0J3QlNCr0KDQo9Co0Ksg0J7QoNCi0JDQm9Cr0pogKEdPU1QpIDIwMjIxCzAJBgNVBAYTAktaMB4XDTI0MDMwNDA2NDEwMVoXDTI1MDMwNDA2NDEwMVowggFDMSQwIgYDVQQDDBvQkNCi0JDQm9Cr0JrQntCSINCQ0KHQm9CQ0J0xGTAXBgNVBAQMENCQ0KLQkNCb0KvQmtCe0JIxGDAWBgNVBAUTD0lJTjg0MDMyNzM1MDE0ODELMAkGA1UEBhMCS1oxgZ0wgZoGA1UECgyBktCT0L7RgdGD0LTQsNGA0YHRgtCy0LXQvdC90L7QtSDRg9GH0YDQtdC20LTQtdC90LjQtSAi0JzQuNC90LjRgdGC0LXRgNGB0YLQstC+INCy0L3Rg9GC0YDQtdC90L3QuNGFINC00LXQuyDQoNC10YHQv9GD0LHQu9C40LrQuCDQmtCw0LfQsNGF0YHRgtCw0L0iMRgwFgYDVQQLDA9CSU45NjAzNDAwMDA1MTQxHzAdBgNVBCoMFtCR0JDQl9CQ0KDQkdCQ0JXQktCY0KcwgawwIwYJKoMOAwoBAQICMBYGCiqDDgMKAQECAgEGCCqDDgMKAQMDA4GEAASBgDM5X6bKZG3Pu6oJGGph48PzRm8RSe/VF7OlRkLf8INV5nUuIWbVpcKrdzE/2wzP7+Mpac2qxnSsLs7lcUYKn67tRAEsXl+dBP2kkGKypAgK+9hJu37f5cRZDBImX/S+hNg5m5m4wwG43NM+zoagRIQ9zmhF2iFgp+nCLqM6dFwXo4IBsTCCAa0wOQYDVR0gBDIwMDAuBgYqgw4DAwIwJDAiBggrBgEFBQcCARYWaHR0cDovL3BraS5nb3Yua3ovY3BzIDBoBggrBgEFBQcBAQRcMFowIgYIKwYBBQUHMAGGFmh0dHA6Ly9vY3NwLnBraS5nb3Yua3owNAYIKwYBBQUHMAKGKGh0dHA6Ly9wa2kuZ292Lmt6L2NlcnQvbmNhX2dvc3RfMjAyMi5jZXIwOAYDVR0fBDEwLzAtoCugKYYnaHR0cDovL2NybC5wa2kuZ292Lmt6L25jYV9nb3N0XzIwMjIuY3JsMDoGA1UdLgQzMDEwL6AtoCuGKWh0dHA6Ly9jcmwucGtpLmdvdi5rei9uY2FfZF9nb3N0XzIwMjIuY3JsMA4GA1UdDwEB/wQEAwIDyDAoBgNVHSUEITAfBggrBgEFBQcDBAYIKoMOAwMEAQIGCSqDDgMDBAECAjAdBgNVHQ4EFgQUKwt8+U4s0qnUzEOaXOsBEdpbLzIwHwYDVR0jBBgwFoAU/jC+n8iQYz8f/1o8DLDIX0xtFwgwFgYGKoMOAwMFBAwwCgYIKoMOAwMFAQEwDgYKKoMOAwoBAQIDAgUAA4GBAP/rX7tx+0+y+hlQyM0fvVvotq9Nbhn6JdWd1KahPB3thZjIJ4QKxQII9GjVtUJ8JD0WWmsLhOadKDTew5LS4Q9m0aIs2U7YENaATm9v3STcGOp48FjvGn7f1yFr5hVdRENe5msI7X9v54NT6a5iDVXIPkk9WwcceO7ek21KwV2d</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></soapenv:Header>
+   <soapenv:Body>
+      <con:ContractSyncRequest>
+         <con:RequestInfo>
+            <con:RequestId>REQUEST-001</con:RequestId>
+            <con:Timestamp>2025-05-15T10:00:00</con:Timestamp>
+            <con:SourceSystem>EXTERNAL</con:SourceSystem>
+         </con:RequestInfo>
+         <con:ContractData>
+            <con:Operation>CREATE_CONTRACT</con:Operation>
+            <con:Contract>
+               <con:ContractId>CONTR-001</con:ContractId>
+               <con:ContractNumber>TD-12345</con:ContractNumber>
+               <con:ContractDate>2025-05-15</con:ContractDate>
+               <con:StartDate>2025-05-15</con:StartDate>
+               <con:ContractType>PERMANENT</con:ContractType>
+               <con:Position>Программист</con:Position>
+<con:PositionCode>01</con:PositionCode>
+<con:Salary>450000</con:Salary>
+</con:Contract>
+<con:Employee>
+   <con:EmployeeId>EMP-001</con:EmployeeId>
+   <con:IIN>123456789012</con:IIN>
+   <con:LastName>Иванов</con:LastName>
+   <con:FirstName>Иван</con:FirstName>
+   <con:MiddleName>Иванович</con:MiddleName>
+   <con:BirthDate>1990-01-01</con:BirthDate>
+   <con:Gender>MALE</con:Gender>
+   <con:Citizenship>KZ</con:Citizenship>
+   <con:documentInfo>
+      <con:documentType>ID_CARD</con:documentType>
+      <con:documentNumber>123456789</con:documentNumber>
+      <con:issueDate>2015-01-01</con:issueDate>
+      <con:issuedBy>МВД РК</con:issuedBy>
+      <con:expiryDate>2025-01-01</con:expiryDate>
+   </con:documentInfo>
+   <con:address>
+      <con:countryCode>KZ</con:countryCode>
+      <con:katoCode>711210</con:katoCode>
+      <con:city>Астана</con:city>
+      <con:street>Кунаева</con:street>
+      <con:building>12</con:building>
+      <con:apartment>45</con:apartment>
+   </con:address>
+   <con:contacts>
+      <con:phone>+77771234567</con:phone>
+      <con:email>ivanov@example.com</con:email>
+   </con:contacts>
+</con:Employee>
+<con:Employer>
+   <con:EmployerId>EMPL-001</con:EmployerId>
+   <con:BIN>123456789012</con:BIN>
+   <con:Name>ТОО "Пример"</con:Name>
+   <con:LegalAddress>
+      <con:CountryCode>KZ</con:CountryCode>
+      <con:KATOCode>711210</con:KATOCode>
+      <con:City>Астана</con:City>
+   </con:LegalAddress>
+   <con:contacts>
+      <con:phone>+77272123456</con:phone>
+      <con:email>info@primer.kz</con:email>
+   </con:contacts>
+</con:Employer>
+         </con:ContractData>
+      </con:ContractSyncRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

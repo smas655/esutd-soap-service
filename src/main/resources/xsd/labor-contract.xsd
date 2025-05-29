@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:tns="http://10.61.40.133/shep/bip-sync-wss-gost/"
+           targetNamespace="http://10.61.40.133/shep/bip-sync-wss-gost/"
+           elementFormDefault="qualified">
+
+    <xs:element name="ContractSyncRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="RequestInfo" type="tns:RequestInfoType"/>
+                <xs:element name="ContractData" type="tns:ContractDataType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ContractSyncResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Status" type="tns:StatusType"/>
+                <xs:element name="ErrorMessage" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="RequestInfoType">
+        <xs:sequence>
+            <xs:element name="RequestId" type="xs:string"/>
+            <xs:element name="Timestamp" type="xs:dateTime"/>
+            <xs:element name="SourceSystem" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="StatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="OK"/>
+            <xs:enumeration value="ERROR"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ContractDataType">
+        <xs:sequence>
+            <xs:element name="Operation" type="tns:OperationType"/>
+            <xs:element name="Contract" type="tns:ContractType" minOccurs="0"/>
+            <xs:element name="Employee" type="tns:EmployeeType" minOccurs="0"/>
+            <xs:element name="Employer" type="tns:EmployerType" minOccurs="0"/>
+            <xs:element name="TerminationInfo" type="tns:TerminationInfoType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="OperationType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CREATE_CONTRACT"/>
+            <xs:enumeration value="UPDATE_CONTRACT"/>
+            <xs:enumeration value="TERMINATE_CONTRACT"/>
+            <xs:enumeration value="UPDATE_EMPLOYEE"/>
+            <xs:enumeration value="UPDATE_EMPLOYER"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ContractType">
+        <xs:sequence>
+            <xs:element name="ContractId" type="xs:string"/>
+            <xs:element name="ContractNumber" type="xs:string"/>
+            <xs:element name="ContractDate" type="xs:date"/>
+            <xs:element name="ContractDurationType" type="xs:string" minOccurs="0"/>
+            <xs:element name="StartDate" type="xs:date"/>
+            <xs:element name="EndDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="ContractType" type="tns:ContractTypeEnum"/>
+            <xs:element name="Position" type="xs:string"/>
+            <xs:element name="PositionCode" type="xs:string"/>
+            <xs:element name="WorkType" type="xs:string" minOccurs="0"/>
+            <xs:element name="RemoteWork" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="WorkPlaceAddress" type="xs:string" minOccurs="0"/>
+            <xs:element name="WorkPlaceKato" type="xs:string" minOccurs="0"/>
+            <xs:element name="WorkPlaceCountry" type="xs:string" minOccurs="0"/>
+            <xs:element name="WorkHours" type="xs:string" minOccurs="0"/>
+            <xs:element name="TariffRate" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="WorkConditions" type="xs:string" minOccurs="0"/>
+            <xs:element name="WorkConditionCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="GeneralSkills" type="xs:string" minOccurs="0"/>
+            <xs:element name="ProfessionalSkills" type="xs:string" minOccurs="0"/>
+            <xs:element name="Department" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ContractTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="INDEFINITE"/>
+            <xs:enumeration value="FIXED_TERM_ONE_YEAR_PLUS"/>
+            <xs:enumeration value="SEASONAL"/>
+            <xs:enumeration value="SPECIFIC_WORK"/>
+            <xs:enumeration value="TEMPORARY_REPLACEMENT"/>
+            <xs:enumeration value="SEASONAL_WORK"/>
+            <xs:enumeration value="FOREIGN_LABOR_PERMIT"/>
+            <xs:enumeration value="CHILD_CARE_LEAVE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="EmployeeType">
+        <xs:sequence>
+            <xs:element name="EmployeeId" type="xs:string"/>
+            <xs:element name="IIN" type="xs:string"/>
+            <xs:element name="LastName" type="xs:string"/>
+            <xs:element name="FirstName" type="xs:string"/>
+            <xs:element name="MiddleName" type="xs:string" minOccurs="0"/>
+            <xs:element name="BirthDate" type="xs:date"/>
+            <xs:element name="Gender" type="tns:GenderType"/>
+            <xs:element name="Citizenship" type="xs:string"/>
+            <xs:element name="Address" type="tns:AddressType" minOccurs="0"/>
+            <xs:element name="Contacts" type="tns:ContactsType" minOccurs="0"/>
+            <xs:element name="DocumentInfo" type="tns:DocumentInfoType" minOccurs="0"/>
+            <xs:element name="BankName" type="xs:string" minOccurs="0"/>
+            <xs:element name="BIK" type="xs:string" minOccurs="0"/>
+            <xs:element name="AccountNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="PhoneNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="HrPhoneNumber" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EmployerType">
+        <xs:sequence>
+            <xs:element name="EmployerId" type="xs:string"/>
+            <xs:element name="BIN" type="xs:string"/>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="KatoCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="EmployerType" type="xs:string" minOccurs="0"/>
+            <xs:element name="LegalAddress" type="tns:AddressType"/>
+            <xs:element name="Contacts" type="tns:ContactsType" minOccurs="0"/>
+            <xs:element name="BankName" type="xs:string" minOccurs="0"/>
+            <xs:element name="BIK" type="xs:string" minOccurs="0"/>
+            <xs:element name="AccountNumber" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TerminationInfoType">
+        <xs:sequence>
+            <xs:element name="ContractId" type="xs:string"/>
+            <xs:element name="TerminationDate" type="xs:date"/>
+            <xs:element name="TerminationReason" type="xs:string"/>
+            <xs:element name="TerminationReasonCode" type="xs:string"/>
+            <xs:element name="OrderNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="OrderDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="AdditionalInfo" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AddressType">
+        <xs:sequence>
+            <xs:element name="CountryCode" type="xs:string"/>
+            <xs:element name="KATOCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="City" type="xs:string" minOccurs="0"/>
+            <xs:element name="Street" type="xs:string" minOccurs="0"/>
+            <xs:element name="Building" type="xs:string" minOccurs="0"/>
+            <xs:element name="Apartment" type="xs:string" minOccurs="0"/>
+            <xs:element name="PostalCode" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ContactsType">
+        <xs:sequence>
+            <xs:element name="Phone" type="xs:string" minOccurs="0"/>
+            <xs:element name="Email" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DocumentInfoType">
+        <xs:sequence>
+            <xs:element name="DocumentType" type="xs:string"/>
+            <xs:element name="DocumentNumber" type="xs:string"/>
+            <xs:element name="IssueDate" type="xs:date"/>
+            <xs:element name="IssuedBy" type="xs:string"/>
+            <xs:element name="ExpiryDate" type="xs:date" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="GenderType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MALE"/>
+            <xs:enumeration value="FEMALE"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

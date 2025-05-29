@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="1" author="esutd_soap">
+        <sql>CREATE SCHEMA IF NOT EXISTS esutd_soap</sql>
+    </changeSet>
+    
+    <changeSet id="2" author="esutd_soap">
+        <createTable tableName="ref_dictionary" schemaName="esutd_soap">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="reference_type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_ru" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_kz" type="text"/>
+            <column name="description" type="text"/>
+            <column name="is_active" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="date"/>
+        </createTable>
+        
+        <addUniqueConstraint 
+            constraintName="uq_reference_type_code" 
+            tableName="ref_dictionary" 
+            schemaName="esutd_soap"
+            columnNames="reference_type, code"/>
+        
+        <createIndex 
+            indexName="idx_references_type_code" 
+            tableName="ref_dictionary" 
+            schemaName="esutd_soap">
+            <column name="reference_type"/>
+            <column name="code"/>
+        </createIndex>
+        
+        <createTable tableName="employers" schemaName="esutd_soap">
+            <column name="employer_id" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="bin" type="varchar(12)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kato_code" type="varchar(20)"/>
+            <column name="employer_type" type="varchar(50)"/>
+            <column name="address_country" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_kato_code" type="varchar(20)"/>
+            <column name="address_city" type="varchar(100)"/>
+            <column name="address_street" type="varchar(255)"/>
+            <column name="address_building" type="varchar(50)"/>
+            <column name="address_postal_code" type="varchar(20)"/>
+            <column name="phone" type="varchar(20)"/>
+            <column name="email" type="varchar(100)"/>
+            <column name="bank_name" type="varchar(255)"/>
+            <column name="bik" type="varchar(50)"/>
+            <column name="account_number" type="varchar(50)"/>
+            <column name="created_at" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="date"/>
+        </createTable>
+        
+        <createIndex 
+            indexName="idx_employer_bin" 
+            tableName="employers" 
+            schemaName="esutd_soap">
+            <column name="bin"/>
+        </createIndex>
+        
+        <createTable tableName="employees" schemaName="esutd_soap">
+            <column name="employee_id" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="iin" type="varchar(12)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="last_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_name" type="varchar(100)"/>
+            <column name="birth_date" type="date">
+                <constraints nullable="true"/>
+            </column>
+            <column name="gender" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="citizenship" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_country" type="varchar(10)"/>
+            <column name="address_kato_code" type="varchar(20)"/>
+            <column name="address_city" type="varchar(100)"/>
+            <column name="address_street" type="varchar(255)"/>
+            <column name="address_building" type="varchar(50)"/>
+            <column name="address_apartment" type="varchar(50)"/>
+            <column name="address_postal_code" type="varchar(20)"/>
+            <column name="bank_name" type="varchar(255)"/>
+            <column name="bik" type="varchar(50)"/>
+            <column name="account_number" type="varchar(50)"/>
+            <column name="phone_number" type="varchar(20)"/>
+            <column name="hr_phone_number" type="varchar(20)"/>
+            <column name="created_at" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="date"/>
+        </createTable>
+        
+        <createIndex 
+            indexName="idx_employee_iin" 
+            tableName="employees" 
+            schemaName="esutd_soap">
+            <column name="iin"/>
+        </createIndex>
+        
+        <createTable tableName="contracts" schemaName="esutd_soap">
+            <column name="contract_id" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="contract_number" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_duration_type" type="varchar(100)"/>
+            <column name="start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="date"/>
+            <column name="contract_type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="position" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="position_code" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="work_type" type="varchar(100)"/>
+            <column name="remote_work" type="boolean"/>
+            <column name="work_place_address" type="varchar(255)"/>
+            <column name="work_place_kato" type="varchar(20)"/>
+            <column name="work_place_country" type="varchar(10)"/>
+            <column name="work_hours" type="varchar(100)"/>
+            <column name="tariff_rate" type="numeric(12, 2)"/>
+            <column name="work_conditions" type="text"/>
+            <column name="work_condition_code" type="varchar(50)"/>
+            <column name="department" type="varchar(255)"/>
+            <column name="general_skills" type="text"/>
+            <column name="professional_skills" type="text"/>
+            <column name="is_active" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="termination_date" type="date"/>
+            <column name="termination_reason" type="varchar(255)"/>
+            <column name="termination_reason_code" type="varchar(50)"/>
+            <column name="employee_id" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="employer_id" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="date"/>
+        </createTable>
+        
+        <addForeignKeyConstraint 
+            baseTableName="contracts" 
+            baseTableSchemaName="esutd_soap"
+            baseColumnNames="employee_id" 
+            constraintName="fk_contract_employee" 
+            referencedTableName="employees" 
+            referencedTableSchemaName="esutd_soap"
+            referencedColumnNames="employee_id"/>
+            
+        <addForeignKeyConstraint 
+            baseTableName="contracts" 
+            baseTableSchemaName="esutd_soap"
+            baseColumnNames="employer_id" 
+            constraintName="fk_contract_employer" 
+            referencedTableName="employers" 
+            referencedTableSchemaName="esutd_soap"
+            referencedColumnNames="employer_id"/>
+            
+        <createIndex 
+            indexName="idx_contract_employee" 
+            tableName="contracts" 
+            schemaName="esutd_soap">
+            <column name="employee_id"/>
+        </createIndex>
+        
+        <createIndex 
+            indexName="idx_contract_employer" 
+            tableName="contracts" 
+            schemaName="esutd_soap">
+            <column name="employer_id"/>
+        </createIndex>
+        
+        <createIndex 
+            indexName="idx_contract_active" 
+            tableName="contracts" 
+            schemaName="esutd_soap">
+            <column name="is_active"/>
+        </createIndex>
+        
+        <createIndex 
+            indexName="idx_contract_dates" 
+            tableName="contracts" 
+            schemaName="esutd_soap">
+            <column name="start_date"/>
+            <column name="end_date"/>
+        </createIndex>
+    </changeSet>
+
+    <include file="db/changelog/v1.1-specialized-references.xml"/>
+</databaseChangeLog>

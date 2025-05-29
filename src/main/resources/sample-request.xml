@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                 xmlns:con="http://example.gov.kz/esutd/soap/contract">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <con:ContractSyncRequest>
+            <con:RequestInfo>
+                <con:RequestId>REQ123456789</con:RequestId>
+                <con:Timestamp>2025-05-30T12:30:00</con:Timestamp>
+                <con:SourceSystem>ESUTD</con:SourceSystem>
+            </con:RequestInfo>
+            <con:ContractData>
+                <con:Operation>CREATE_CONTRACT</con:Operation>
+                <con:Contract>
+                    <con:ContractId>CTR-2025-001</con:ContractId>
+                    <con:ContractNumber>K-2025/123</con:ContractNumber>
+                    <con:ContractDate>2025-05-30</con:ContractDate>
+                    <con:ContractDurationType>FIXED_TERM</con:ContractDurationType>
+                    <con:StartDate>2025-06-01</con:StartDate>
+                    <con:EndDate>2026-05-31</con:EndDate>
+                    <con:ContractType>TEMPORARY</con:ContractType>
+                    <con:Position>Программист</con:Position>
+                    <con:PositionCode>IT-PROGR-001</con:PositionCode>
+                    <con:WorkType>FULL_TIME</con:WorkType>
+                    <con:RemoteWork>true</con:RemoteWork>
+                    <con:WorkPlaceAddress>г. Астана, ул. Мангилик Ел 55/5</con:WorkPlaceAddress>
+                    <con:WorkPlaceKato>711210</con:WorkPlaceKato>
+                    <con:WorkPlaceCountry>KZ</con:WorkPlaceCountry>
+                    <con:WorkHours>40 часов в неделю</con:WorkHours>
+                    <con:TariffRate>500000</con:TariffRate>
+                    <con:WorkConditions>Нормальные условия труда</con:WorkConditions>
+                    <con:WorkConditionCode>NORMAL</con:WorkConditionCode>
+                    <con:Department>Департамент информационных технологий</con:Department>
+                    <con:GeneralSkills>Java, Spring Boot, SQL</con:GeneralSkills>
+                    <con:ProfessionalSkills>Разработка микросервисов, REST API</con:ProfessionalSkills>
+                </con:Contract>
+                <con:Employee>
+                    <con:EmployeeId>EMP-2025-001</con:EmployeeId>
+                    <con:IIN>901231123456</con:IIN>
+                    <con:LastName>Русланов</con:LastName>
+                    <con:FirstName>Руслан</con:FirstName>
+                    <con:MiddleName>Русланович</con:MiddleName>
+                    <con:BirthDate>1990-12-31</con:BirthDate>
+                    <con:Gender>MALE</con:Gender>
+                    <con:Citizenship>KZ</con:Citizenship>
+                    <con:Address>
+                        <con:CountryCode>KZ</con:CountryCode>
+                        <con:KATOCode>711210</con:KATOCode>
+                        <con:City>Астана</con:City>
+                        <con:Street>Абая</con:Street>
+                        <con:Building>12</con:Building>
+                        <con:Apartment>45</con:Apartment>
+                        <con:PostalCode>010000</con:PostalCode>
+                    </con:Address>
+                    <con:BankName>Народный Банк</con:BankName>
+                    <con:BIK>HSBKKZKX</con:BIK>
+                    <con:AccountNumber>KZ123456789012345678</con:AccountNumber>
+                    <con:PhoneNumber>+77771234567</con:PhoneNumber>
+                    <con:HRPhoneNumber>+77776543210</con:HRPhoneNumber>
+                </con:Employee>
+                <con:Employer>
+                    <con:EmployerId>EMPL-2025-001</con:EmployerId>
+                    <con:BIN>123456789012</con:BIN>
+                    <con:Name>ТОО "ТехноСофт"</con:Name>
+                    <con:KatoCode>711210</con:KatoCode>
+                    <con:EmployerType>TOO</con:EmployerType>
+                    <con:LegalAddress>
+                        <con:CountryCode>KZ</con:CountryCode>
+                        <con:KATOCode>711210</con:KATOCode>
+                        <con:City>Астана</con:City>
+                        <con:Street>Мангилик Ел</con:Street>
+                        <con:Building>55/5</con:Building>
+                        <con:PostalCode>010000</con:PostalCode>
+                    </con:LegalAddress>
+                    <con:Phone>+77272123456</con:Phone>
+                    <con:Email>info@technosoft.kz</con:Email>
+                    <con:BankName>Народный Банк</con:BankName>
+                    <con:BIK>HSBKKZKX</con:BIK>
+                    <con:AccountNumber>KZ987654321098765432</con:AccountNumber>
+                </con:Employer>
+            </con:ContractData>
+        </con:ContractSyncRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

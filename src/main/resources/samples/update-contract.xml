@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                 xmlns:con="http://example.gov.kz/esutd/soap/contract">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <con:ContractSyncRequest>
+         <con:RequestInfo>
+            <con:RequestId>REQ-2025-002</con:RequestId>
+            <con:Timestamp>2025-05-30T14:30:00</con:Timestamp>
+            <con:SourceSystem>ESUTD</con:SourceSystem>
+         </con:RequestInfo>
+         <con:ContractData>
+            <con:Operation>UPDATE_CONTRACT</con:Operation>
+            <con:Contract>
+               <con:ContractId>CTR-2025-100</con:ContractId>
+               <con:ContractNumber>TD-2025-100</con:ContractNumber>
+               <con:ContractDate>2025-05-30</con:ContractDate>
+               <con:ContractDurationType>FIXED_TERM</con:ContractDurationType>
+               <con:StartDate>2025-06-01</con:StartDate>
+               <con:EndDate>2026-11-30</con:EndDate>
+               <con:ContractType>PERMANENT</con:ContractType>
+               <con:Position>Старший программист</con:Position>
+               <con:PositionCode>IT-SENIOR-001</con:PositionCode>
+               <con:WorkType>FULL_TIME</con:WorkType>
+               <con:RemoteWork>true</con:RemoteWork>
+               <con:WorkPlaceAddress>г. Астана, ул. Мангилик Ел 55/5</con:WorkPlaceAddress>
+               <con:WorkPlaceKato>711210</con:WorkPlaceKato>
+               <con:WorkPlaceCountry>KZ</con:WorkPlaceCountry>
+               <con:WorkHours>40 часов в неделю</con:WorkHours>
+               <con:TariffRate>600000</con:TariffRate>
+               <con:WorkConditions>Удаленная работа 3 дня в неделю</con:WorkConditions>
+               <con:WorkConditionCode>REMOTE_PARTIAL</con:WorkConditionCode>
+               <con:Department>Департамент разработки</con:Department>
+               <con:GeneralSkills>Java, Spring Boot, SQL, Microservices</con:GeneralSkills>
+               <con:ProfessionalSkills>Разработка микросервисов, REST API, Архитектура ПО</con:ProfessionalSkills>
+            </con:Contract>
+         </con:ContractData>
+      </con:ContractSyncRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

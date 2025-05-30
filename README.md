@@ -69,7 +69,7 @@ cd esutd-soap-service
 
 2. Настроить подключение к базе данных в `src/main/resources/application.properties`:
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/esutd_db
+spring.datasource.url=jdbc:postgresql://localhost:5431/esutd_db
 spring.datasource.username=your_username
 spring.datasource.password=your_password
 ```

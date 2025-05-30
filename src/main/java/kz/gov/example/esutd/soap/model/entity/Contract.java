@@ -3,12 +3,14 @@ package kz.gov.example.esutd.soap.model.entity;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "contracts")
 @NoArgsConstructor
 @Data
+@Slf4j
 public class Contract {
 
     @Id

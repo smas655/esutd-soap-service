@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
-                 xmlns:con="http://example.gov.kz/esutd/soap/contract">
+                 xmlns:con="http://10.61.40.133/shep/bip-sync-wss-gost/">
    <soapenv:Header/>
    <soapenv:Body>
       <con:ContractSyncRequest>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings 
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    xmlns:annox="http://annox.dev.java.net"
+    jaxb:extensionBindingPrefixes="xjc annox"
+    jaxb:version="2.1">
+    
+    <jaxb:globalBindings generateElementProperty="false">
+        <xjc:simple />
+        <xjc:serializable uid="1" />
+        <xjc:superClass name="kz.gov.example.esutd.soap.model.BaseJaxbType"/>
+        <jaxb:javaType name="java.time.LocalDate" xmlType="xs:date"
+            parseMethod="javax.xml.bind.DatatypeConverter.parseDate"
+            printMethod="javax.xml.bind.DatatypeConverter.printDate" />
+        <jaxb:serializable/>
+        <!-- Prevent duplicate getters/setters -->
+        <xjc:noValidator />
+        <xjc:noMarshaller />
+        <xjc:noUnmarshaller />
+    </jaxb:globalBindings>
+    
+    <jaxb:bindings schemaLocation="labor-contract.xsd" node="/xs:schema">
+        <!-- Common bindings for all generated classes -->
+        <jaxb:bindings node="//xs:complexType">
+            <annox:annotate>
+                <annox:annotate annox:class="@lombok.Data" />
+                <annox:annotate annox:class="@lombok.NoArgsConstructor" />
+                <annox:annotate annox:class="@lombok.AllArgsConstructor" />
+                <annox:annotate annox:class="@javax.xml.bind.annotation.XmlAccessorType(javax.xml.bind.annotation.XmlAccessType.FIELD)" />
+                <annox:annotate annox:class="@javax.xml.bind.annotation.XmlType(propOrder={
+                    /* No properties by default */
+                })" />
+            </annox:annotate>
+        </jaxb:bindings>
+        
+        <!-- Specific type bindings -->
+        <jaxb:bindings node="//xs:complexType[@name='ContractSyncResponse']">
+            <jaxb:class name="ContractSyncResponseType"/>
+            <annox:annotate>
+                <annox:annotate annox:class="@lombok.EqualsAndHashCode(callSuper = true)" />
+                <annox:annotate annox:class="@lombok.ToString(callSuper = true)" />
+            </annox:annotate>
+            <!-- Explicitly define property names to prevent duplicates -->
+            <jaxb:bindings node=".//xs:element[@name='status']">
+                <jaxb:property name="status" />
+            </jaxb:bindings>
+            <jaxb:bindings node=".//xs:element[@name='errorMessage']">
+                <jaxb:property name="errorMessage" />
+            </jaxb:bindings>
+        </jaxb:bindings>
+        
+        <jaxb:bindings node="//xs:complexType[@name='RequestInfo']">
+            <jaxb:class name="RequestInfoType"/>
+            <!-- Explicitly define property names to prevent duplicates -->
+            <jaxb:bindings node=".//xs:element[@name='requestId']">
+                <jaxb:property name="requestId" />
+            </jaxb:bindings>
+            <jaxb:bindings node=".//xs:element[@name='timestamp']">
+                <jaxb:property name="timestamp" />
+            </jaxb:bindings>
+            <jaxb:bindings node=".//xs:element[@name='sourceSystem']">
+                <jaxb:property name="sourceSystem" />
+            </jaxb:bindings>
+        </jaxb:bindings>
+        
+        <jaxb:bindings node="//xs:complexType[@name='Address']">
+            <jaxb:class name="AddressType"/>
+            <jaxb:property name="katoCode" />
+            <jaxb:property name="countryCode" />
+            <jaxb:property name="city" />
+            <jaxb:property name="street" />
+            <jaxb:property name="building" />
+            <jaxb:factoryMethod name="createAddressType"/>
+        </jaxb:bindings>
+        
+        <!-- Add explicit property bindings for other types -->
+        <jaxb:bindings node="//xs:complexType[@name='Employee']">
+            <jaxb:property name="iin" />
+            <jaxb:property name="lastName" />
+            <jaxb:property name="firstName" />
+            <jaxb:property name="middleName" />
+            <jaxb:property name="gender" />
+            <jaxb:property name="birthDate" />
+            <jaxb:property name="citizenship" />
+        </jaxb:bindings>
+        
+        <jaxb:bindings node="//xs:complexType[@name='Employer']">
+            <jaxb:property name="bin" />
+            <jaxb:property name="name" />
+            <jaxb:property name="address" />
+        </jaxb:bindings>
+        
+        <!-- Configure enums -->
+        <jaxb:bindings node="//xs:simpleType[@name='ContractType']">
+            <jaxb:typesafeEnumClass name="ContractType"/>
+        </jaxb:bindings>
+        
+        <!-- Configure elements with customizations -->
+        <jaxb:bindings node="//xs:element[@name='contract']">
+            <jaxb:class name="ContractType"/>
+        </jaxb:bindings>
+        
+        <!-- Remove the overly broad element binding that matches too many nodes -->
+    </jaxb:bindings>
+</jaxb:bindings>

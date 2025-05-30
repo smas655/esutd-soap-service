@@ -6,9 +6,18 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ContractRepository extends JpaRepository<Contract, String> {
+    
+    /**
+     * Найти трудовой договор по его уникальному идентификатору
+     * 
+     * @param contractId уникальный идентификатор трудового договора
+     * @return трудовой договор, если найден
+     */
+    Optional<Contract> findByContractId(String contractId);
     
     List<Contract> findByEmployeeIin(String iin);
     

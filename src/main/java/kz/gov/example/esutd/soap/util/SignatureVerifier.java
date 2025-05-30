@@ -4,37 +4,35 @@ import kz.gov.example.esutd.soap.config.SoapMessageInterceptor;
 import kz.gov.example.esutd.soap.model.ContractSyncRequest;
 import kz.gov.pki.kalkan.jce.provider.KalkanProvider;
 import kz.gov.pki.kalkan.xmldsig.KncaXS;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
-import java.io.StringWriter;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.StringReader;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Security;
 import java.security.Signature;
 import java.security.cert.X509Certificate;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import java.io.StringReader;
 import java.util.Enumeration;
+
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import java.io.InputStream;
 import org.xml.sax.InputSource;
 import kz.gov.example.esutd.soap.util.digital.KalkanBinarySignature;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class SignatureVerifier {
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(SignatureVerifier.class);
+    private static final Logger log = LoggerFactory.getLogger(SignatureVerifier.class);
 
     @Value("${signature.certificate.path}")
     private String certificatePath;
@@ -266,21 +264,5 @@ public class SignatureVerifier {
         }
     }
 
-    private String jaxbObjectToXml(Object jaxbObject) throws Exception {
-        JAXBContext context = JAXBContext.newInstance(jaxbObject.getClass());
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        
-        StringWriter sw = new StringWriter();
-        marshaller.marshal(jaxbObject, sw);
-        return sw.toString();
-    }
 
-    private <T> T xmlToJaxbObject(String xml, Class<T> clazz) throws Exception {
-        JAXBContext context = JAXBContext.newInstance(clazz);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        
-        StringReader reader = new StringReader(xml);
-        return clazz.cast(unmarshaller.unmarshal(reader));
-    }
 } 

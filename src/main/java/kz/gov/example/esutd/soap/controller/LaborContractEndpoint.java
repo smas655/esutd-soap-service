@@ -9,6 +9,7 @@ import kz.gov.example.esutd.soap.repository.EmployerRepository;
 import kz.gov.example.esutd.soap.service.ContractService;
 import kz.gov.example.esutd.soap.service.ReferenceService;
 import kz.gov.example.esutd.soap.util.SignatureVerifier;
+import kz.gov.example.esutd.soap.config.SignatureVerificationConfig;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -24,13 +25,14 @@ import java.util.Optional;
 public class LaborContractEndpoint {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LaborContractEndpoint.class);
     
-    private static final String NAMESPACE_URI = "http://example.gov.kz/esutd/soap/contract";
+    private static final String NAMESPACE_URI = "http://10.61.40.133/shep/bip-sync-wss-gost/";
     
     private final ContractService contractService;
     private final ReferenceService referenceService;
     private final SignatureVerifier signatureVerifier;
     private final EmployeeRepository employeeRepository;
     private final EmployerRepository employerRepository;
+    private final SignatureVerificationConfig signatureVerificationConfig;
     
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "ContractSyncRequest")
     @ResponsePayload
@@ -40,8 +42,14 @@ public class LaborContractEndpoint {
         ContractSyncResponse response = new ContractSyncResponse();
         
         try {
-            if (!signatureVerifier.verify(request)) {
-               throw new SecurityException("Invalid digital signature");
+            if (signatureVerificationConfig.isEnabled()) {
+                log.info("Verifying digital signature...");
+                if (!signatureVerifier.verify(request)) {
+                    throw new SecurityException("Invalid digital signature");
+                }
+                log.info("Digital signature verified successfully");
+            } else {
+                log.warn("WARNING: Signature verification is disabled in configuration. This should only be used for testing!");
             }
             
             processOperation(request.getContractData());

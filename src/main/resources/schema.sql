@@ -153,6 +153,65 @@ CREATE TABLE IF NOT EXISTS ref_profession_to_skill (
     updated_at DATE
 );
 
+-- Таблица для справочника НКЗ (профессий)
+CREATE TABLE IF NOT EXISTS nkz_classifier (
+    code VARCHAR(10) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    action VARCHAR(20),
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    description TEXT,
+    parent_code VARCHAR(10),
+    level INTEGER,
+    created_at DATE NOT NULL DEFAULT CURRENT_DATE,
+    updated_at DATE
+);
+
+-- Таблица для дополнительных соглашений к трудовому договору
+CREATE TABLE IF NOT EXISTS subsidiary_contracts (
+    id BIGSERIAL PRIMARY KEY,
+    subsidiary_contract_id VARCHAR(50) NOT NULL,
+    subsidiary_contract_number VARCHAR(60) NOT NULL,
+    subsidiary_contract_date DATE NOT NULL,
+    subsidiary_contract_type VARCHAR(100),
+    subsidiary_contract_reason VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    position VARCHAR(255),
+    position_code VARCHAR(1024),
+    work_type VARCHAR(100),
+    remote_work BOOLEAN,
+    work_place_address VARCHAR(255),
+    work_place_kato VARCHAR(20),
+    work_place_country VARCHAR(10),
+    work_hours VARCHAR(100),
+    tariff_rate NUMERIC(12, 2),
+    work_conditions TEXT,
+    work_condition_code VARCHAR(50),
+    contract_id VARCHAR(50) NOT NULL,
+    created_at DATE NOT NULL DEFAULT CURRENT_DATE,
+    updated_at DATE,
+    CONSTRAINT fk_subsidiary_contract_contract FOREIGN KEY (contract_id) REFERENCES contracts (contract_id)
+);
+
+-- Таблица для дополнительных документов к трудовому договору
+CREATE TABLE IF NOT EXISTS additional_documents (
+    id BIGSERIAL PRIMARY KEY,
+    document_id VARCHAR(50) NOT NULL,
+    document_type VARCHAR(100) NOT NULL,
+    document_number VARCHAR(60),
+    document_date DATE,
+    document_name VARCHAR(255),
+    document_description TEXT,
+    document_data TEXT,
+    file_name VARCHAR(255),
+    file_mime_type VARCHAR(100),
+    file_size BIGINT,
+    contract_id VARCHAR(50) NOT NULL,
+    created_at DATE NOT NULL DEFAULT CURRENT_DATE,
+    updated_at DATE,
+    CONSTRAINT fk_additional_document_contract FOREIGN KEY (contract_id) REFERENCES contracts (contract_id)
+);
+
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_references_type_code ON ref_dictionary(reference_type, code);
 CREATE INDEX IF NOT EXISTS idx_employee_iin ON employees(iin);
@@ -167,3 +226,7 @@ CREATE INDEX IF NOT EXISTS idx_ref_professional_skill_code ON ref_professional_s
 CREATE INDEX IF NOT EXISTS idx_ref_professional_area_code ON ref_professional_area(code);
 CREATE INDEX IF NOT EXISTS idx_ref_prof_area_to_profession_codes ON ref_prof_area_to_profession(prof_area_code, profession_code);
 CREATE INDEX IF NOT EXISTS idx_ref_profession_to_skill_codes ON ref_profession_to_skill(profession_code, skill_code);
+CREATE INDEX IF NOT EXISTS idx_nkz_classifier_code ON nkz_classifier(code);
+CREATE INDEX IF NOT EXISTS idx_nkz_classifier_parent_code ON nkz_classifier(parent_code);
+CREATE INDEX IF NOT EXISTS idx_subsidiary_contract_contract_id ON subsidiary_contracts(contract_id);
+CREATE INDEX IF NOT EXISTS idx_additional_document_contract_id ON additional_documents(contract_id);

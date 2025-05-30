@@ -1,5 +1,8 @@
 package kz.gov.example.esutd.soap.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,6 +10,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.transport.http.HttpComponentsMessageSender;
 import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
+import org.springframework.ws.soap.SoapVersion;
 
 @Configuration
 public class ShepSoapClientConfig {
@@ -21,12 +25,20 @@ public class ShepSoapClientConfig {
     public Jaxb2Marshaller marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("kz.gov.example.esutd.soap.model");
+        
+        // Настройка свойств маршаллера
+        Map<String, Object> marshallerProperties = new HashMap<>();
+        marshallerProperties.put("jaxb.formatted.output", true);
+        marshaller.setMarshallerProperties(marshallerProperties);
+        
         return marshaller;
     }
     
     @Bean
     public SaajSoapMessageFactory messageFactory() {
-        return new SaajSoapMessageFactory();
+        SaajSoapMessageFactory messageFactory = new SaajSoapMessageFactory();
+        messageFactory.setSoapVersion(SoapVersion.SOAP_11);
+        return messageFactory;
     }
     
     @Bean

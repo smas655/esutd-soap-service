@@ -44,6 +44,8 @@
             <xs:element name="Employee" type="tns:EmployeeType" minOccurs="0"/>
             <xs:element name="Employer" type="tns:EmployerType" minOccurs="0"/>
             <xs:element name="TerminationInfo" type="tns:TerminationInfoType" minOccurs="0"/>
+            <xs:element name="SubsidiaryContract" type="tns:SubsidiaryContractType" minOccurs="0"/>
+            <xs:element name="AdditionalDocument" type="tns:AdditionalDocumentType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -54,6 +56,9 @@
             <xs:enumeration value="TERMINATE_CONTRACT"/>
             <xs:enumeration value="UPDATE_EMPLOYEE"/>
             <xs:enumeration value="UPDATE_EMPLOYER"/>
+            <xs:enumeration value="ADD_SUBSIDIARY_CONTRACT"/>
+            <xs:enumeration value="UPDATE_SUBSIDIARY_CONTRACT"/>
+            <xs:enumeration value="ADD_DOCUMENT"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -179,4 +184,44 @@
             <xs:enumeration value="FEMALE"/>
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:complexType name="SubsidiaryContractType">
+        <xs:sequence>
+            <xs:element name="ContractId" type="xs:string"/>
+            <xs:element name="SubsidiaryContractId" type="xs:string"/>
+            <xs:element name="SubsidiaryContractNumber" type="xs:string"/>
+            <xs:element name="SubsidiaryContractDate" type="xs:date"/>
+            <xs:element name="SubsidiaryContractType" type="xs:string" minOccurs="0"/>
+            <xs:element name="SubsidiaryContractReason" type="xs:string" minOccurs="0"/>
+            <xs:element name="StartDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="EndDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="Position" type="xs:string" minOccurs="0"/>
+            <xs:element name="PositionCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="WorkType" type="xs:string" minOccurs="0"/>
+            <xs:element name="RemoteWork" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="WorkPlaceAddress" type="xs:string" minOccurs="0"/>
+            <xs:element name="WorkPlaceKato" type="xs:string" minOccurs="0"/>
+            <xs:element name="WorkPlaceCountry" type="xs:string" minOccurs="0"/>
+            <xs:element name="WorkHours" type="xs:string" minOccurs="0"/>
+            <xs:element name="TariffRate" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="WorkConditions" type="xs:string" minOccurs="0"/>
+            <xs:element name="WorkConditionCode" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AdditionalDocumentType">
+        <xs:sequence>
+            <xs:element name="ContractId" type="xs:string"/>
+            <xs:element name="DocumentId" type="xs:string"/>
+            <xs:element name="DocumentType" type="xs:string"/>
+            <xs:element name="DocumentNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="DocumentDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="DocumentName" type="xs:string" minOccurs="0"/>
+            <xs:element name="DocumentDescription" type="xs:string" minOccurs="0"/>
+            <xs:element name="DocumentData" type="xs:string" minOccurs="0"/>
+            <xs:element name="FileName" type="xs:string" minOccurs="0"/>
+            <xs:element name="FileMimeType" type="xs:string" minOccurs="0"/>
+            <xs:element name="FileSize" type="xs:long" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

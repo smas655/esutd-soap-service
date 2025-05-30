@@ -8,17 +8,21 @@
         <version>2.7.17</version>
         <relativePath/>
     </parent>
-    
+
     <groupId>kz.gov.example</groupId>
     <artifactId>esutd-soap-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>esutd-soap-service</name>
     <description>SOAP Service for receiving labor contract data from ESUTD</description>
-    
+
     <properties>
         <java.version>17</java.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
+        <jaxb-runtime.version>2.3.3</jaxb-runtime.version>
+        <wss4j.version>2.4.1</wss4j.version>
+        <lombok.version>1.18.30</lombok.version>
     </properties>
-    
+
     <dependencies>
         <!-- Spring Boot -->
         <dependency>
@@ -29,7 +33,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        
+
         <!-- Spring Web Services -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -38,6 +42,10 @@
                 <exclusion>
                     <groupId>org.glassfish.jaxb</groupId>
                     <artifactId>jaxb-runtime</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.apache.ws.security</groupId>
@@ -49,38 +57,36 @@
             <groupId>wsdl4j</groupId>
             <artifactId>wsdl4j</artifactId>
         </dependency>
-        
-        <!-- JAXB для работы с XML -->
+
+        <!-- JAXB API и реализация -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>2.3.8</version>
-        </dependency>
-        <!-- Jakarta XML Binding для поддержки новых моделей -->
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>3.0.1</version>
+            <version>${jaxb-api.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>3.0.2</version>
-            <scope>runtime</scope>
+            <version>${jaxb-runtime.version}</version>
         </dependency>
-        
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>${jaxb-runtime.version}</version>
+        </dependency>
+
         <!-- PostgreSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <!-- Apache POI для работы с Excel файлами -->
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -92,63 +98,65 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.2</version>
         </dependency>
-        
-        <!-- Lombok для уменьшения шаблонного кода -->
+
+        <!-- Lombok to reduce boilerplate code -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
 
-
-<!-- Web Services Security - Using version compatible with Spring Boot 2.7.x -->
-<dependency>
-    <groupId>org.apache.wss4j</groupId>
-    <artifactId>wss4j-ws-security-common</artifactId>
-    <version>2.2.5</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.wss4j</groupId>
-    <artifactId>wss4j-ws-security-dom</artifactId>
-    <version>2.2.5</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.wss4j</groupId>
-    <artifactId>wss4j-ws-security-stax</artifactId>
-    <version>2.2.5</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.santuario</groupId>
-    <artifactId>xmlsec</artifactId>
-    <version>2.1.7</version>
-</dependency>
-
-    <!-- Для использования локальных библиотек -->
-<dependency>
-    <groupId>kz.gov.pki.kalkan</groupId>
-    <artifactId>knca_provider_jce_kalkan</artifactId>
-    <version>0.7.5</version>
-    <scope>system</scope>
-    <systemPath>${project.basedir}/lib/knca_provider_jce_kalkan-0.7.5.jar</systemPath>
-</dependency>
-<dependency>
-    <groupId>kz.gov.pki.kalkan</groupId>
-    <artifactId>kalkancrypt-xmldsig</artifactId>
-    <version>0.5</version>
-    <scope>system</scope>
-    <systemPath>${project.basedir}/lib/kalkancrypt-xmldsig-0.5.jar</systemPath>
-</dependency>
-        
+        <!-- Web Services Security - Using version compatible with Spring Boot 2.7.x -->
         <dependency>
-    <groupId>javax.xml.soap</groupId>
-    <artifactId>javax.xml.soap-api</artifactId>
-    <version>1.4.0</version>
-</dependency>
-<dependency>
-    <groupId>com.sun.xml.messaging.saaj</groupId>
-    <artifactId>saaj-impl</artifactId>
-    <version>1.5.3</version>
-</dependency>
+            <groupId>org.apache.wss4j</groupId>
+            <artifactId>wss4j-ws-security-common</artifactId>
+            <version>${wss4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wss4j</groupId>
+            <artifactId>wss4j-ws-security-dom</artifactId>
+            <version>${wss4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wss4j</groupId>
+            <artifactId>wss4j-ws-security-stax</artifactId>
+            <version>${wss4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.santuario</groupId>
+            <artifactId>xmlsec</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+
+        <!-- Для использования локальных библиотек -->
+        <dependency>
+            <groupId>kz.gov.pki.kalkan</groupId>
+            <artifactId>knca_provider_jce_kalkan</artifactId>
+            <version>0.7.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/knca_provider_jce_kalkan-0.7.5.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>kz.gov.pki.kalkan</groupId>
+            <artifactId>kalkancrypt-xmldsig</artifactId>
+            <version>0.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/kalkancrypt-xmldsig-0.5.jar</systemPath>
+        </dependency>
+
+        <!-- SOAP API -->
+        <dependency>
+            <groupId>javax.xml.soap</groupId>
+            <artifactId>javax.xml.soap-api</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.messaging.saaj</groupId>
+            <artifactId>saaj-impl</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+
         
         <!-- Apache HTTP Components -->
         <dependency>
@@ -162,84 +170,105 @@
             <version>4.4.16</version>
         </dependency>
 
-<!-- Liquibase для управления схемой БД -->
-<dependency>
-    <groupId>org.liquibase</groupId>
-    <artifactId>liquibase-core</artifactId>
-</dependency>
-
-<!-- Добавьте эти зависимости для javax.xml.soap -->
-<dependency>
-    <groupId>com.sun.xml.ws</groupId>
-    <artifactId>jaxws-ri</artifactId>
-    <version>2.3.5</version>
-    <type>pom</type>
-</dependency>
-
-
-        <!-- Тестирование -->
+        <!-- Liquibase для управления схемой БД -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
         </dependency>
 
-        <!-- SpringDoc OpenAPI UI (Swagger) -->
+        <!-- Swagger/OpenAPI для документации API -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.7.0</version>
         </dependency>
-        <!-- SLF4J API for logging -->
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.7.36</version>
-    </dependency>
-    <!-- Logback Classic as SLF4J implementation -->
-    <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>1.2.11</version>
-    </dependency>
-</dependencies>
-    
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
-<plugin>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-maven-plugin</artifactId>
-    <configuration>
-        <includeSystemScope>true</includeSystemScope>
-        <excludes>
-            <exclude>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-            </exclude>
-        </excludes>
-    </configuration>
-</plugin>
-            
-            <!-- JAXB2 Maven Plugin для генерации Java-классов из XSD -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- Clean plugin to ensure proper cleanup -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.build.directory}/generated-sources</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
+            <!-- Explicitly disable JAXB code generation to prevent duplicate methods -->
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.14.0</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!-- Use build-helper-maven-plugin to add source directories -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
-                        <id>xjc</id>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
                         <goals>
-                            <goal>xjc</goal>
+                            <goal>add-source</goal>
                         </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.basedir}/src/main/java</source>
+                            </sources>
+                        </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Configure Maven compiler plugin with Lombok annotation processor -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
-                    <sources>
-                        <source>${project.basedir}/src/main/resources/xsd</source>
-                    </sources>
-                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-                    <clearOutputDir>false</clearOutputDir>
-                    <packageName>kz.gov.example.esutd.soap.model</packageName>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>

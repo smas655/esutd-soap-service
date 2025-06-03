@@ -182,25 +182,23 @@ public class LaborContractEndpoint {
     
     private Contract mapToContractEntity(ContractType contractType) {
         Contract contract = new Contract();
-        contract.setContractId(contractType.getContractId());
+        if (contractType.getContractId() != null) {
+            contract.setContractId(contractType.getContractId());
+        } else {
+            contract.setContractId(java.util.UUID.randomUUID().toString());
+        }
         contract.setContractNumber(contractType.getContractNumber());
-        
         contract.setContractDate(LocalDate.parse(contractType.getContractDate().toString()));
         contract.setStartDate(LocalDate.parse(contractType.getStartDate().toString()));
-        
         if (contractType.getEndDate() != null) {
             contract.setEndDate(LocalDate.parse(contractType.getEndDate().toString()));
         }
-        
         contract.setContractType(Contract.ContractType.valueOf(contractType.getContractType().toString()));
-        
         contract.setPosition(contractType.getPosition());
         contract.setPositionCode(contractType.getPositionCode());
-        
         contract.setWorkConditions(contractType.getWorkConditions());
         contract.setWorkHours(contractType.getWorkHours());
         contract.setDepartment(contractType.getDepartment());
-        
         return contract;
     }
     
@@ -211,24 +209,13 @@ public class LaborContractEndpoint {
         employee.setLastName(employeeType.getLastName());
         employee.setFirstName(employeeType.getFirstName());
         employee.setMiddleName(employeeType.getMiddleName());
-        
         employee.setBirthDate(LocalDate.parse(employeeType.getBirthDate().toString()));
-        
         employee.setGender(Employee.Gender.valueOf(employeeType.getGender().toString()));
-        
         employee.setCitizenship(employeeType.getCitizenship());
-        
         if (employeeType.getAddress() != null) {
             AddressType address = employeeType.getAddress();
             employee.setAddressCountry(address.getCountryCode());
-            employee.setAddressKatoCode(address.getKatoCode());
-            employee.setAddressCity(address.getCity());
-            employee.setAddressStreet(address.getStreet());
-            employee.setAddressBuilding(address.getBuilding());
-            employee.setAddressApartment(address.getApartment());
-            employee.setAddressPostalCode(address.getPostalCode());
         }
-        
         return employee;
     }
     
@@ -238,9 +225,13 @@ public class LaborContractEndpoint {
         employer.setBin(employerType.getBin());
         employer.setName(employerType.getName());
         
+        employer.setAddressCountry("KZ");
+        
         if (employerType.getLegalAddress() != null) {
             AddressType address = employerType.getLegalAddress();
-            employer.setAddressCountry(address.getCountryCode());
+            if (address.getCountryCode() != null && !address.getCountryCode().isEmpty()) {
+                employer.setAddressCountry(address.getCountryCode());
+            }
             employer.setAddressKatoCode(address.getKatoCode());
             employer.setAddressCity(address.getCity());
             employer.setAddressStreet(address.getStreet());

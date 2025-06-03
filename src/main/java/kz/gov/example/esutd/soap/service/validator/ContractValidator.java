@@ -1,14 +1,14 @@
 package kz.gov.example.esutd.soap.service.validator;
 
-import kz.gov.example.esutd.soap.model.dto.ContractData;
-import kz.gov.example.esutd.soap.model.entity.NkzClassifier;
-import kz.gov.example.esutd.soap.repository.NkzClassifierRepository;
+import kz.gov.example.esutd.soap.model.entity.Contract;
+import kz.gov.example.esutd.soap.service.ReferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.validation.ValidationException;
 import java.time.LocalDate;
-import java.util.Optional;
+import java.time.Period;
 
 /**
  * Валидатор данных трудового договора
@@ -17,86 +17,137 @@ import java.util.Optional;
 public class ContractValidator {
     
     @Autowired
-    private NkzClassifierRepository nkzClassifierRepository;
+    private ReferenceService referenceService;
     
     /**
      * Валидирует данные трудового договора
      * 
-     * @param contractData данные трудового договора
+     * @param contract данные трудового договора
      * @throws ValidationException если данные не прошли валидацию
      */
-    public void validateContract(ContractData contractData) {
-        // Проверка обязательных полей
-        if (contractData.getEmployer() == null) {
-            throw new ValidationException("Данные работодателя обязательны");
+    public void validateContract(Contract contract) {
+        if (contract == null) {
+            throw new ValidationException("Contract cannot be null");
         }
         
-        if (contractData.getEmployer().getBin() == null || 
-            contractData.getEmployer().getBin().length() != 12) {
-            throw new ValidationException("БИН работодателя должен содержать 12 символов");
-        }
-        
-        if (contractData.getEmployee() == null) {
-            throw new ValidationException("Данные работника обязательны");
-        }
-        
-        if (contractData.getEmployee().getIin() == null || 
-            contractData.getEmployee().getIin().length() != 12) {
-            throw new ValidationException("ИИН работника должен содержать 12 символов");
-        }
-        
-        // Проверка дат
-        validateDates(contractData);
-        
-        // Проверка справочных значений
-        validateReferenceData(contractData);
+        validateContractDates(contract);
+        validatePosition(contract);
+        validateWorkingHours(contract);
+        validateWorkConditions(contract);
     }
     
     /**
      * Валидирует даты в данных трудового договора
      * 
-     * @param contractData данные трудового договора
+     * @param contract данные трудового договора
      * @throws ValidationException если даты не прошли валидацию
      */
-    private void validateDates(ContractData contractData) {
+    private void validateContractDates(Contract contract) {
+        if (contract.getStartDate() == null) {
+            throw new ValidationException("Contract start date is required");
+        }
+        
         LocalDate now = LocalDate.now();
         
-        if (contractData.getContractDate() == null) {
-            throw new ValidationException("Дата заключения договора обязательна");
+        // Проверка даты начала контракта
+        if (contract.getStartDate().isBefore(now.minusYears(1))) {
+            throw new ValidationException("Contract start date cannot be more than 1 year in the past");
         }
         
-        if (contractData.getContractDate().isAfter(now)) {
-            throw new ValidationException("Дата заключения договора не может быть в будущем");
+        if (contract.getStartDate().isAfter(now.plusYears(1))) {
+            throw new ValidationException("Contract start date cannot be more than 1 year in the future");
         }
         
-        if (contractData.getStartDate() == null) {
-            throw new ValidationException("Дата начала работы обязательна");
+        // Проверка даты окончания контракта, если она указана
+        if (contract.getEndDate() != null) {
+            if (contract.getEndDate().isBefore(contract.getStartDate())) {
+                throw new ValidationException("Contract end date cannot be before start date");
+            }
+            
+            // Проверка максимальной длительности контракта (5 лет)
+            Period period = Period.between(contract.getStartDate(), contract.getEndDate());
+            if (period.getYears() > 5) {
+                throw new ValidationException("Contract duration cannot exceed 5 years");
+            }
         }
         
-        if (contractData.getContractDurationType() != null && 
-            contractData.getContractDurationType().equals("FIXED_TERM") && 
-            contractData.getEndDate() == null) {
-            throw new ValidationException("Для срочного договора дата окончания обязательна");
+        // Проверка даты заключения контракта
+        if (contract.getContractDate() == null) {
+            throw new ValidationException("Contract date is required");
         }
         
-        if (contractData.getEndDate() != null && 
-            contractData.getStartDate().isAfter(contractData.getEndDate())) {
-            throw new ValidationException("Дата начала работы не может быть позже даты окончания");
+        if (contract.getContractDate().isAfter(now)) {
+            throw new ValidationException("Contract date cannot be in the future");
+        }
+        
+        if (contract.getContractDate().isAfter(contract.getStartDate())) {
+            throw new ValidationException("Contract date cannot be after start date");
         }
     }
     
     /**
      * Валидирует справочные данные в данных трудового договора
      * 
-     * @param contractData данные трудового договора
+     * @param contract данные трудового договора
      * @throws ValidationException если справочные данные не прошли валидацию
      */
-    private void validateReferenceData(ContractData contractData) {
-        if (contractData.getPositionCode() != null) {
-            Optional<NkzClassifier> nkzClassifier = nkzClassifierRepository.findById(contractData.getPositionCode());
-            if (nkzClassifier.isEmpty() || !nkzClassifier.get().getIsActive()) {
-                throw new ValidationException("Указанный код должности не найден в справочнике НКЗ или не активен");
-            }
+    private void validatePosition(Contract contract) {
+        if (!StringUtils.hasText(contract.getPosition())) {
+            throw new ValidationException("Position name is required");
+        }
+        
+        if (!StringUtils.hasText(contract.getPositionCode())) {
+            throw new ValidationException("Position code is required");
+        }
+        
+        if (!referenceService.isPositionValid(contract.getPositionCode())) {
+            throw new ValidationException("Invalid position code: " + contract.getPositionCode());
+        }
+        
+        // Проверка соответствия кода и названия должности
+        String expectedPositionName = referenceService.getPositionName(contract.getPositionCode());
+        if (expectedPositionName != null && !expectedPositionName.equalsIgnoreCase(contract.getPosition())) {
+            throw new ValidationException(String.format(
+                "Position name '%s' does not match the code '%s' (expected: '%s')",
+                contract.getPosition(), contract.getPositionCode(), expectedPositionName
+            ));
+        }
+    }
+    
+    private void validateWorkingHours(Contract contract) {
+        if (StringUtils.hasText(contract.getWorkHours()) && 
+            !referenceService.isWorkingHoursValid(contract.getWorkHours())) {
+            throw new ValidationException("Invalid working hours code: " + contract.getWorkHours());
+        }
+    }
+    
+    private void validateWorkConditions(Contract contract) {
+        if (StringUtils.hasText(contract.getWorkConditions()) && 
+            !referenceService.isWorkConditionsValid(contract.getWorkConditions())) {
+            throw new ValidationException("Invalid work conditions code: " + contract.getWorkConditions());
+        }
+    }
+    
+    public void validateTermination(String terminationReasonCode, LocalDate terminationDate) {
+        if (!StringUtils.hasText(terminationReasonCode)) {
+            throw new ValidationException("Termination reason code is required");
+        }
+        
+        if (!referenceService.isTerminationReasonValid(terminationReasonCode)) {
+            throw new ValidationException("Invalid termination reason code: " + terminationReasonCode);
+        }
+        
+        if (terminationDate == null) {
+            throw new ValidationException("Termination date is required");
+        }
+        
+        LocalDate now = LocalDate.now();
+        if (terminationDate.isAfter(now.plusMonths(1))) {
+            throw new ValidationException("Termination date cannot be more than 1 month in the future");
+        }
+        
+        if (terminationDate.isBefore(now.minusYears(1))) {
+            throw new ValidationException("Termination date cannot be more than 1 year in the past");
         }
     }
 }

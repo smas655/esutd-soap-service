@@ -16,6 +16,7 @@ kz/gov/example/esutd/soap/repository/SubsidiaryContractRepository.class
 kz/gov/example/esutd/soap/config/JaxbConfig.class
 kz/gov/example/esutd/soap/model/dto/ContractData$EmployerData.class
 kz/gov/example/esutd/soap/repository/ProfessionalSkillRepository.class
+kz/gov/example/esutd/soap/config/ReferenceDataConfig.class
 kz/gov/example/esutd/soap/model/ObjectFactory.class
 kz/gov/example/esutd/soap/util/digital/CertificateWrapper.class
 kz/gov/example/esutd/soap/controller/ShepSoapController.class
@@ -29,8 +30,10 @@ kz/gov/example/esutd/soap/service/ReferenceDataService.class
 kz/gov/example/esutd/soap/service/ReferenceDataService$1.class
 kz/gov/example/esutd/soap/controller/ContractApiController.class
 kz/gov/example/esutd/soap/model/entity/AdditionalDocument.class
+kz/gov/example/esutd/soap/config/ReferenceDataConfig$ExcelConfig.class
 kz/gov/example/esutd/soap/model/ContractSyncResponse.class
 kz/gov/example/esutd/soap/model/ContractType.class
+kz/gov/example/esutd/soap/config/SignatureVerificationConfig.class
 kz/gov/example/esutd/soap/model/entity/Employer.class
 kz/gov/example/esutd/soap/model/EmployerType.class
 kz/gov/example/esutd/soap/controller/ProfessionController.class
@@ -67,6 +70,7 @@ kz/gov/example/esutd/soap/model/entity/ProfessionalArea.class
 kz/gov/example/esutd/soap/model/dto/ContractData$SubsidiaryContractData.class
 kz/gov/example/esutd/soap/service/SpecializedReferenceImportService.class
 kz/gov/example/esutd/soap/util/digital/KalkanBinarySignature.class
+kz/gov/example/esutd/soap/service/ReferenceService$1.class
 kz/gov/example/esutd/soap/repository/ContractRepository.class
 kz/gov/example/esutd/soap/config/ShepSoapClientConfig.class
 kz/gov/example/esutd/soap/repository/EmployeeRepository.class
@@ -84,4 +88,5 @@ kz/gov/example/esutd/soap/model/AddressType.class
 kz/gov/example/esutd/soap/service/ContractDocumentService.class
 kz/gov/example/esutd/soap/model/RequestInfoType.class
 kz/gov/example/esutd/soap/model/entity/Contract.class
+kz/gov/example/esutd/soap/config/ReferenceDataConfig$ColumnConfig.class
 kz/gov/example/esutd/soap/config/SoapMessageInterceptor.class

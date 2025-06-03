@@ -15,7 +15,7 @@ public interface ReferenceRepository extends JpaRepository<Reference, Long> {
     
     Optional<Reference> findByReferenceTypeAndCodeAndIsActiveTrue(String referenceType, String code);
     
-    boolean existsByReferenceTypeAndCode(String referenceType, String code);
+    boolean existsByReferenceTypeAndCodeAndIsActiveTrue(String referenceType, String code);
 
     long countByReferenceTypeAndCreatedAt(String referenceType, LocalDate createdAt);
 } 

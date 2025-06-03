@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
-                 xmlns:con="http://10.61.40.133/shep/bip-sync-wss-gost/">
+                 xmlns:ns2="http://10.61.40.133/shep/bip-sync-wss-gost/">
    <soapenv:Header/>
    <soapenv:Body>
-      <con:ContractSyncRequest>
-         <con:RequestInfo>
-            <con:RequestId>REQ-2025-003</con:RequestId>
-            <con:Timestamp>2025-05-30T16:45:00</con:Timestamp>
-            <con:SourceSystem>ESUTD</con:SourceSystem>
-         </con:RequestInfo>
-         <con:ContractData>
-            <con:Operation>TERMINATE_CONTRACT</con:Operation>
-            <con:TerminationInfo>
-               <con:ContractId>CTR-2025-100</con:ContractId>
-               <con:TerminationDate>2025-05-30</con:TerminationDate>
-               <con:TerminationReason>По соглашению сторон</con:TerminationReason>
-               <con:TerminationReasonCode>MUTUAL_AGREEMENT</con:TerminationReasonCode>
-            </con:TerminationInfo>
-         </con:ContractData>
-      </con:ContractSyncRequest>
+      <ns2:ContractSyncRequest>
+         <ns2:RequestInfo>
+            <ns2:RequestId>REQ-2025-003</ns2:RequestId>
+            <ns2:Timestamp>2025-05-30T15:30:00</ns2:Timestamp>
+            <ns2:SourceSystem>ESUTD</ns2:SourceSystem>
+         </ns2:RequestInfo>
+         <ns2:ContractData>
+            <ns2:Operation>TERMINATE_CONTRACT</ns2:Operation>
+            <ns2:TerminationInfo>
+               <ns2:ContractId>CTR-2025-100</ns2:ContractId>
+               <ns2:TerminationDate>2025-06-15</ns2:TerminationDate>
+               <ns2:TerminationReason>По соглашению сторон</ns2:TerminationReason>
+               <ns2:TerminationReasonCode>01</ns2:TerminationReasonCode>
+            </ns2:TerminationInfo>
+         </ns2:ContractData>
+      </ns2:ContractSyncRequest>
    </soapenv:Body>
 </soapenv:Envelope>

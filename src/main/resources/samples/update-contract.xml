@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
-                 xmlns:con="http://10.61.40.133/shep/bip-sync-wss-gost/">
+                 xmlns:ns2="http://10.61.40.133/shep/bip-sync-wss-gost/">
    <soapenv:Header/>
    <soapenv:Body>
-      <con:ContractSyncRequest>
-         <con:RequestInfo>
-            <con:RequestId>REQ-2025-002</con:RequestId>
-            <con:Timestamp>2025-05-30T14:30:00</con:Timestamp>
-            <con:SourceSystem>ESUTD</con:SourceSystem>
-         </con:RequestInfo>
-         <con:ContractData>
-            <con:Operation>UPDATE_CONTRACT</con:Operation>
-            <con:Contract>
-               <con:ContractId>CTR-2025-100</con:ContractId>
-               <con:ContractNumber>TD-2025-100</con:ContractNumber>
-               <con:ContractDate>2025-05-30</con:ContractDate>
-               <con:ContractDurationType>FIXED_TERM</con:ContractDurationType>
-               <con:StartDate>2025-06-01</con:StartDate>
-               <con:EndDate>2026-11-30</con:EndDate>
-               <con:ContractType>PERMANENT</con:ContractType>
-               <con:Position>Старший программист</con:Position>
-               <con:PositionCode>IT-SENIOR-001</con:PositionCode>
-               <con:WorkType>FULL_TIME</con:WorkType>
-               <con:RemoteWork>true</con:RemoteWork>
-               <con:WorkPlaceAddress>г. Астана, ул. Мангилик Ел 55/5</con:WorkPlaceAddress>
-               <con:WorkPlaceKato>711210</con:WorkPlaceKato>
-               <con:WorkPlaceCountry>KZ</con:WorkPlaceCountry>
-               <con:WorkHours>40 часов в неделю</con:WorkHours>
-               <con:TariffRate>600000</con:TariffRate>
-               <con:WorkConditions>Удаленная работа 3 дня в неделю</con:WorkConditions>
-               <con:WorkConditionCode>REMOTE_PARTIAL</con:WorkConditionCode>
-               <con:Department>Департамент разработки</con:Department>
-               <con:GeneralSkills>Java, Spring Boot, SQL, Microservices</con:GeneralSkills>
-               <con:ProfessionalSkills>Разработка микросервисов, REST API, Архитектура ПО</con:ProfessionalSkills>
-            </con:Contract>
-         </con:ContractData>
-      </con:ContractSyncRequest>
+      <ns2:ContractSyncRequest>
+         <ns2:RequestInfo>
+            <ns2:RequestId>REQ-2025-002</ns2:RequestId>
+            <ns2:Timestamp>2025-05-30T14:30:00</ns2:Timestamp>
+            <ns2:SourceSystem>ESUTD</ns2:SourceSystem>
+         </ns2:RequestInfo>
+         <ns2:ContractData>
+            <ns2:Operation>UPDATE_CONTRACT</ns2:Operation>
+            <ns2:Contract>
+               <ns2:ContractId>CTR-2025-100</ns2:ContractId>
+               <ns2:ContractNumber>TD-2025-100</ns2:ContractNumber>
+               <ns2:ContractDate>2025-05-30</ns2:ContractDate>
+               <ns2:ContractDurationType>FIXED_TERM</ns2:ContractDurationType>
+               <ns2:StartDate>2025-06-01</ns2:StartDate>
+               <ns2:EndDate>2026-11-30</ns2:EndDate>
+               <ns2:ContractType>FIXED_TERM_ONE_YEAR_PLUS</ns2:ContractType>
+               <ns2:Position>Системный аналитик</ns2:Position>
+               <ns2:PositionCode>2511-1-002</ns2:PositionCode>
+               <ns2:WorkType>FULL_TIME</ns2:WorkType>
+               <ns2:RemoteWork>true</ns2:RemoteWork>
+               <ns2:WorkPlaceAddress>г. Астана, ул. Мангилик Ел 55/5</ns2:WorkPlaceAddress>
+               <ns2:WorkPlaceKato>711000000</ns2:WorkPlaceKato>
+               <ns2:WorkPlaceCountry>KZ</ns2:WorkPlaceCountry>
+               <ns2:WorkHours>1</ns2:WorkHours>
+               <ns2:TariffRate>600000</ns2:TariffRate>
+               <ns2:WorkConditionCode>STANDARD</ns2:WorkConditionCode>
+               <ns2:Department>Департамент разработки</ns2:Department>
+               <ns2:GeneralSkills>Java, Spring Boot, SQL, Microservices</ns2:GeneralSkills>
+               <ns2:ProfessionalSkills>Разработка микросервисов, REST API, Архитектура ПО</ns2:ProfessionalSkills>
+            </ns2:Contract>
+         </ns2:ContractData>
+      </ns2:ContractSyncRequest>
    </soapenv:Body>
 </soapenv:Envelope>

@@ -3,6 +3,7 @@
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/EmployeeType.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/controller/SignController.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/config/JaxbConfig.java
+/Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/config/SignatureVerificationConfig.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/package-info.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/service/ReferenceService.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/entity/ProfessionToSkill.java
@@ -25,6 +26,7 @@
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/ContractType.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/service/ContractDocumentService.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/service/ShepClientService.java
+/Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/config/Wss4jSecurityInterceptorConfig.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/SubsidiaryContractType.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/config/WebServiceConfig.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/ContactsType.java
@@ -67,6 +69,7 @@
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/AdditionalDocumentType.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/entity/GeneralSkill.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/repository/ProfessionalAreaRepository.java
+/Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/config/ReferenceDataConfig.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/service/ReferenceDataService.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/entity/Contract.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/service/validator/ContractValidator.java

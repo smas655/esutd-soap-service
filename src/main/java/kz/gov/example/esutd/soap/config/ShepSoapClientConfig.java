@@ -26,7 +26,6 @@ public class ShepSoapClientConfig {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("kz.gov.example.esutd.soap.model");
         
-        // Настройка свойств маршаллера
         Map<String, Object> marshallerProperties = new HashMap<>();
         marshallerProperties.put("jaxb.formatted.output", true);
         marshaller.setMarshallerProperties(marshallerProperties);

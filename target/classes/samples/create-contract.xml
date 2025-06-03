@@ -19,17 +19,16 @@
                <ns2:StartDate>2025-06-01</ns2:StartDate>
                <ns2:EndDate>2026-05-31</ns2:EndDate>
                <ns2:ContractType>TEMPORARY_REPLACEMENT</ns2:ContractType>
-               <ns2:Position>Программист</ns2:Position>
-               <ns2:PositionCode>IT-PROGR-001</ns2:PositionCode>
+               <ns2:Position>Системный аналитик</ns2:Position>
+               <ns2:PositionCode>2511-1-002</ns2:PositionCode>
                <ns2:WorkType>FULL_TIME</ns2:WorkType>
                <ns2:RemoteWork>true</ns2:RemoteWork>
                <ns2:WorkPlaceAddress>г. Астана, ул. Мангилик Ел 55/5</ns2:WorkPlaceAddress>
-               <ns2:WorkPlaceKato>711210</ns2:WorkPlaceKato>
+               <ns2:WorkPlaceKato>711000000</ns2:WorkPlaceKato>
                <ns2:WorkPlaceCountry>KZ</ns2:WorkPlaceCountry>
-               <ns2:WorkHours>40 часов в неделю</ns2:WorkHours>
+               <ns2:WorkHours>1</ns2:WorkHours>
                <ns2:TariffRate>500000</ns2:TariffRate>
-               <ns2:WorkConditions>Удаленная работа 3 дня в неделю</ns2:WorkConditions>
-               <ns2:WorkConditionCode>REMOTE_PARTIAL</ns2:WorkConditionCode>
+               <ns2:WorkConditionCode>STANDARD</ns2:WorkConditionCode>
                <ns2:Department>Департамент разработки</ns2:Department>
                <ns2:GeneralSkills>Java, Spring Boot, SQL</ns2:GeneralSkills>
                <ns2:ProfessionalSkills>Разработка микросервисов, REST API</ns2:ProfessionalSkills>
@@ -62,18 +61,20 @@
                <ns2:EmployerId>EMPL-2025-100</ns2:EmployerId>
                <ns2:BIN>123456789012</ns2:BIN>
                <ns2:Name>ТОО "ТехноСофт"</ns2:Name>
-               <ns2:KatoCode>711210</ns2:KatoCode>
+               <ns2:KatoCode>711000000</ns2:KatoCode>
                <ns2:EmployerType>TOO</ns2:EmployerType>
                <ns2:LegalAddress>
                   <ns2:CountryCode>KZ</ns2:CountryCode>
-                  <ns2:KATOCode>711210</ns2:KATOCode>
+                  <ns2:KATOCode>711000000</ns2:KATOCode>
                   <ns2:City>Астана</ns2:City>
                   <ns2:Street>Мангилик Ел</ns2:Street>
                   <ns2:Building>55/5</ns2:Building>
                   <ns2:PostalCode>010000</ns2:PostalCode>
                </ns2:LegalAddress>
-               <ns2:Phone>+77272123456</ns2:Phone>
-               <ns2:Email>info@technosoft.kz</ns2:Email>
+               <ns2:Contacts>
+                  <ns2:Phone>+77272123456</ns2:Phone>
+                  <ns2:Email>info@technosoft.kz</ns2:Email>
+               </ns2:Contacts>
                <ns2:BankName>Народный Банк</ns2:BankName>
                <ns2:BIK>HSBKKZKX</ns2:BIK>
                <ns2:AccountNumber>KZ987654321098765432</ns2:AccountNumber>

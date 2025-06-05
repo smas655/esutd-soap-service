@@ -129,8 +129,8 @@ public class ReferenceService {
     private String getCellValueAsString(Cell cell) {
         if (cell == null) {
             return "";
-        }
-        
+    }
+
         switch (cell.getCellType()) {
             case STRING:
                 return cell.getStringCellValue().trim();
@@ -156,7 +156,7 @@ public class ReferenceService {
             return positions != null && positions.containsKey(code);
         } else {
             return referenceRepository.existsByReferenceTypeAndCodeAndIsActiveTrue("POSITION", code);
-        }
+    }
     }
     
     public String getPositionName(String code) {
@@ -183,7 +183,7 @@ public class ReferenceService {
             return reasons != null && reasons.containsKey(code);
         } else {
             return referenceRepository.existsByReferenceTypeAndCodeAndIsActiveTrue("TERMINATION_REASON", code);
-        }
+    }
     }
     
     public String getTerminationReasonName(String code) {
@@ -238,25 +238,25 @@ public class ReferenceService {
             return result;
         }
     }
-    
+
     @Transactional(readOnly = true)
     public boolean isKatoCodeValid(String code) {
         return referenceRepository.existsByReferenceTypeAndCodeAndIsActiveTrue("KATO", code);
     }
-    
+
     @Transactional
     public Reference saveReference(Reference reference) {
         log.info("Saving reference: type={}, code={}", reference.getReferenceType(), reference.getCode());
         return referenceRepository.save(reference);
     }
-    
+
     @Transactional
     public void updateReferences(List<Reference> references) {
         log.info("Updating {} references", references.size());
         for (Reference reference : references) {
             Optional<Reference> existingReference = referenceRepository.findByReferenceTypeAndCodeAndIsActiveTrue(
                     reference.getReferenceType(), reference.getCode());
-            
+
             if (existingReference.isPresent()) {
                 Reference ref = existingReference.get();
                 ref.setNameRu(reference.getNameRu());
@@ -268,7 +268,7 @@ public class ReferenceService {
             }
         }
     }
-    
+
     @Transactional
     public void deactivateReference(String referenceType, String code) {
         log.info("Deactivating reference: type={}, code={}", referenceType, code);

@@ -24,13 +24,13 @@ import java.util.Optional;
 public class ContractService {
     
     private static final Logger log = LoggerFactory.getLogger(ContractService.class);
-    
+
     private final ContractRepository contractRepository;
     private final EmployeeRepository employeeRepository;
     private final EmployerRepository employerRepository;
     private final ContractValidator contractValidator;
     private final ReferenceService referenceService;
-    
+
     @Transactional
     public Contract createContract(Contract contract, Employee employee, Employer employer) {
         log.info("Creating contract with number: {}", contract.getContractNumber());
@@ -162,13 +162,13 @@ public class ContractService {
             throw new ValidationException("Invalid KATO code: " + employer.getAddressKatoCode());
         }
     }
-    
+
     @Transactional(readOnly = true)
     public Optional<Contract> getContractById(String contractId) {
         log.info("Getting contract with ID: {}", contractId);
         return contractRepository.findById(contractId);
     }
-    
+
     @Transactional(readOnly = true)
     public List<Contract> getAllContracts() {
         log.info("Getting all contracts");

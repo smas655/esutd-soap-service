@@ -144,7 +144,7 @@ public class ContractValidator {
         LocalDate now = LocalDate.now();
         if (terminationDate.isAfter(now.plusMonths(1))) {
             throw new ValidationException("Termination date cannot be more than 1 month in the future");
-        }
+            }
         
         if (terminationDate.isBefore(now.minusYears(1))) {
             throw new ValidationException("Termination date cannot be more than 1 year in the past");

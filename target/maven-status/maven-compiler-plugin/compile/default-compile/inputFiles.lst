@@ -26,7 +26,6 @@
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/ContractType.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/service/ContractDocumentService.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/service/ShepClientService.java
-/Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/config/Wss4jSecurityInterceptorConfig.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/SubsidiaryContractType.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/config/WebServiceConfig.java
 /Users/apple/Downloads/esutd-soap-service/src/main/java/kz/gov/example/esutd/soap/model/ContactsType.java
